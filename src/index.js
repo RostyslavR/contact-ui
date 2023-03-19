@@ -15,8 +15,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <ChakraProvider theme={theme}>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <BrowserRouter basename="contact-ui">
-            {/* <BrowserRouter> */}
+          {/* <BrowserRouter basename="contact-ui"> */}
+          <BrowserRouter>
             <App />
           </BrowserRouter>
         </PersistGate>{' '}
