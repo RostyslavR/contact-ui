@@ -1,73 +1,25 @@
-// import { useEffect, lazy, Suspense } from 'react';
-import { useEffect, lazy } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-// import { Routes, Route, Navigate } from 'react-router-dom';
-import { rememberUser } from 'redux/user/operations';
-import { selectIsSignedIn, selectIsVerifying } from 'redux/user/selectors';
-// import { Box, Progress } from '@chakra-ui/react';
-// import { Header } from 'components/Header/Header';
-import { ProtectedRoute } from './components/ProtectedRoute';
+import logo from './logo.svg';
+import './App.css';
 
-import { Layout } from './components/Layuot';
-
-const Home = lazy(() => import('./pages/Home'));
-const SignUp = lazy(() => import('./pages/SignUp'));
-const SignIn = lazy(() => import('./pages/SignIn'));
-const About = lazy(() => import('./pages/About'));
-const Contacts = lazy(() => import('./pages/Contacts'));
-const JustList = lazy(() => import('./pages/JustList'));
-
-const App = () => {
-  const dispatch = useDispatch();
-  const isSignedIn = useSelector(selectIsSignedIn);
-  const isVerifying = useSelector(selectIsVerifying);
-
-  useEffect(() => {
-    dispatch(rememberUser());
-  }, [dispatch]);
-
+function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route
-          path="signup"
-          element={
-            <ProtectedRoute
-              isAllowed={!isVerifying && !isSignedIn}
-              redirectPath="/"
-            >
-              <SignUp />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="signin"
-          element={
-            <ProtectedRoute isAllowed={!isSignedIn}>
-              <SignIn />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          element={
-            <ProtectedRoute isAllowed={isSignedIn} redirectPath="/signin" />
-          }
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          <Route path="contacts" element={<Contacts />} />
-          <Route path="justlist" element={<JustList />} />
-        </Route>
-
-        <Route path="about/*" element={<About />}>
-          <Route path="projects" element={<p>Our projects</p>} />
-          <Route path="team" element={<p>Our team</p>} />
-        </Route>
-
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Route>
-    </Routes>
+          Learn React
+        </a>
+      </header>
+    </div>
   );
-};
+}
 
 export default App;
