@@ -8,7 +8,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { theme } from 'components/theme';
 // import 'modern-normalize';
 // import './styles.css';
-import App from 'components/App';
+import App from './App';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

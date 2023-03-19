@@ -7,16 +7,16 @@ import { rememberUser } from 'redux/user/operations';
 import { selectIsSignedIn, selectIsVerifying } from 'redux/user/selectors';
 // import { Box, Progress } from '@chakra-ui/react';
 // import { Header } from 'components/Header/Header';
-import { ProtectedRoute } from './ProtectedRoute';
+import { ProtectedRoute } from './components/ProtectedRoute';
 
-import { Layout } from './Layuot';
+import { Layout } from './components/Layuot';
 
-const Home = lazy(() => import('../pages/Home'));
-const SignUp = lazy(() => import('pages/SignUp'));
-const SignIn = lazy(() => import('pages/SignIn'));
-const About = lazy(() => import('pages/About'));
-const Contacts = lazy(() => import('pages/Contacts'));
-const JustList = lazy(() => import('pages/JustList'));
+const Home = lazy(() => import('./pages/Home'));
+const SignUp = lazy(() => import('./pages/SignUp'));
+const SignIn = lazy(() => import('./pages/SignIn'));
+const About = lazy(() => import('./pages/About'));
+const Contacts = lazy(() => import('./pages/Contacts'));
+const JustList = lazy(() => import('./pages/JustList'));
 
 const App = () => {
   const dispatch = useDispatch();
