@@ -1,24 +1,13 @@
-import axios from 'axios';
+import { instance, setToken } from '../instance';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-// axios.defaults.baseURL = 'http://localhost:3300/';
-axios.defaults.baseURL = 'https://contact-server-002g.onrender.com/';
-
-const setAuthHeader = token => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
-
-const clearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = '';
-};
 
 export const signUp = createAsyncThunk(
   'user/signup',
   async (credentials, thunkAPI) => {
     try {
-      const res = await axios.post('/users/signup', credentials);
+      const res = await instance.post('/users/signup', credentials);
 
-      setAuthHeader(res.data.token);
+      setToken(res.data.token);
       const message = 'Account created.';
 
       return { ...res.data, message };
@@ -35,9 +24,9 @@ export const signIn = createAsyncThunk(
     sendMail && (params.sendmail = true);
 
     try {
-      const res = await axios.post('/users/login', credentials, { params });
+      const res = await instance.post('/users/login', credentials, { params });
 
-      setAuthHeader(res.data.token);
+      setToken(res.data.token);
 
       const message = `Hello! ${res.data.user.name}`;
       return { ...res.data, rememberMe, message };
@@ -49,9 +38,9 @@ export const signIn = createAsyncThunk(
 
 export const signOut = createAsyncThunk('user/signuot', async (_, thunkAPI) => {
   try {
-    await axios.get('/users/logout');
+    await instance.get('/users/logout');
     const message = 'See you later';
-    clearAuthHeader();
+    setToken();
     return { message };
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -60,7 +49,7 @@ export const signOut = createAsyncThunk('user/signuot', async (_, thunkAPI) => {
 
 export const remove = createAsyncThunk('user/remove', async (_, thunkAPI) => {
   try {
-    await axios.delete('/users/remove');
+    await instance.delete('/users/remove');
     const message = 'User deleted';
     return { message };
   } catch (error) {
@@ -72,7 +61,7 @@ export const deleteUnVerified = createAsyncThunk(
   'user/deleteUnVerified',
   async (_, thunkAPI) => {
     try {
-      await axios.delete('/users/deleteUnVerified');
+      await instance.delete('/users/deleteUnVerified');
       const message = 'old unverified user deleted';
       return { message };
     } catch (error) {
@@ -91,8 +80,8 @@ export const rememberUser = createAsyncThunk(
       if (persistedToken === null) {
         throw new Error();
       }
-      setAuthHeader(persistedToken);
-      const res = await axios.get('/users/current');
+      setToken(persistedToken);
+      const res = await instance.get('/users/current');
       const message = `Hello! ${res.data.name}`;
       return { user: res.data, message };
     } catch (error) {
@@ -106,7 +95,7 @@ export const verify = createAsyncThunk('user/verify', async (val, thunkAPI) => {
     // await axios.get('/users/logout');
     const message = 'See you later';
     console.log(val);
-    // clearAuthHeader();
+    // setToken();
     return { message };
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);

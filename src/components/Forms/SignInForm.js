@@ -112,17 +112,6 @@ export const SignInForm = () => {
                     />
                   </InputGroup>
                 </FormControl>
-
-                {/* <Checkbox
-                  id="rememberMe"
-                  name="rememberMe"
-                  onChange={formik.handleChange}
-                  isChecked={formik.values.rememberMe}
-                  colorScheme="teal"
-                >
-                  Remember me
-                </Checkbox> */}
-
                 <Checkbox
                   id="sendMail"
                   name="sendMail"

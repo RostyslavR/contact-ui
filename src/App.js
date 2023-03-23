@@ -1,12 +1,8 @@
-// import { useEffect, lazy, Suspense } from 'react';
 import { useEffect, lazy } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-// import { Routes, Route, Navigate } from 'react-router-dom';
 import { rememberUser } from 'redux/user/operations';
 import { selectIsSignedIn, selectIsVerifying } from 'redux/user/selectors';
-// import { Box, Progress } from '@chakra-ui/react';
-// import { Header } from 'components/Header/Header';
 import { ProtectedRoute } from './components/ProtectedRoute';
 
 import { Layout } from './components/Layuot';

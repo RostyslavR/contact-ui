@@ -17,17 +17,21 @@ export const ContactFilter = () => {
   const resetFilter = () => dispatch(applyFilter(''));
 
   return (
-    <InputGroup mb="20px">
-      <InputLeftElement pointerEvents="none" children={<Search2Icon />} />
+    <InputGroup p={4} mb="20px">
+      <InputLeftElement
+        pointerEvents="none"
+        children={<Search2Icon boxSize={6} />}
+      />
       <Input
         type="text"
         name="filter"
         placeholder="Type something here"
-        size="lg"
+        // size="lg"
         value={filter}
         variant="flushed"
         autoComplete="off"
         onChange={handleFilter}
+        fontSize="2xl"
       />
       <InputRightElement
         children={
